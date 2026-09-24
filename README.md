@@ -80,12 +80,6 @@ Aprendí que en Google Colab el orden de ejecución de las celdas es crítico. R
 
 ---
 
-## 🎥 Video Demostración
-
-> 🔗 *Próximamente - grabado con OBS Studio*
-
----
-
 ## 🚀 Cómo Reproducir
 
 1. Abre el cuaderno en Google Colab
@@ -112,11 +106,11 @@ Aprendí que en Google Colab el orden de ejecución de las celdas es crítico. R
 
 ## 👤 Sobre el Autor
 
-Gerardo, 62 años, Guatemala. Mensajero de alto rendimiento y ahora también explorador del mundo de la Inteligencia Artificial. Prueba de que nunca es tarde para aprender tecnología cuando la curiosidad y la perseverancia están presentes.
+Gerardo, 60 años, Guatemala. Mensajero de alto rendimiento y ahora también explorador del mundo de la Inteligencia Artificial. Prueba de que nunca es tarde para aprender tecnología cuando la curiosidad y la perseverancia están presentes.
 
 ## 🎥 Video Demostración
 
-> 🔄 Video en proceso. Será agregado próximamente.
+> 🔄 Video en proceso — grabado con OBS Studio. Será agregado próximamente.
 
 ---
 
