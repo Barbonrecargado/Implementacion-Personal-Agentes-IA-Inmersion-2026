@@ -20,12 +20,15 @@ El proyecto combina dos enfoques complementarios:
 
 ## 🏗️ Arquitectura del Proyecto
 
-### Nodo n8n
-Un agente conversacional construido visualmente con:
+### Agente en n8n
+Un agente conversacional dual construido visualmente con:
 - **Gemini de Google** como modelo de lenguaje
 - **Memoria simple** para mantener contexto de conversación
-- **Tavily** como herramienta de búsqueda web en tiempo real
-- **Solicitud HTTP** para consumo de fuentes externas
+- **Tavily** como herramienta de búsqueda web general en tiempo real
+- **Noticias News API** como herramienta especializada en noticias recientes en español, con autenticación por credencial y parámetros fijos (idioma, cantidad, orden por fecha)
+- Un **mensaje del sistema** que le indica al agente cuándo usar cada herramienta: News API para noticias y actualidad, Tavily para cualquier otro tema
+
+El flujo (JSON exportado) está disponible en [`n8n/agente-noticias-final.json`](n8n/agente-noticias-final.json).
 
 ### Cuaderno Python (Google Colab)
 Un sistema RAG completo con grafo de decisión construido con LangGraph:
@@ -71,10 +74,11 @@ Aprendí que en Google Colab el orden de ejecución de las celdas es crítico. R
 ```
 📦 Implementacion_Personal_Agentes_IA_Inmersion_2026
  ┣ 📓 Implementacion_Personal_Agentes_IA_Inmersion_2026.ipynb
+ ┣ 📁 n8n/
+ ┃ ┗ agente-noticias-final.json
  ┣ 📸 img/
  ┃ ┣ nodo_n8n.png
  ┃ ┗ grafo_langgraph.png
- ┣ 🎥 [Video demostración](URL_DEL_VIDEO)
  ┗ 📄 README.md
 ```
 
@@ -82,7 +86,7 @@ Aprendí que en Google Colab el orden de ejecución de las celdas es crítico. R
 
 ## 🚀 Cómo Reproducir
 
-1. Abre el cuaderno en Google Colab
+1. Abre el cuaderno en Google Colab o en VS Code u otro editor de código
 2. Agrega tu `GOOGLE_API_KEY` y `TAVILY_API_KEY` en los Secrets de Colab (ícono 🔑)
 3. Ejecuta las celdas en orden de arriba hacia abajo
 4. Sube tus PDFs cuando el botón de carga aparezca
@@ -110,7 +114,9 @@ Gerardo, 62 años, Guatemala. Mensajero de alto rendimiento y ahora también exp
 
 ## 🎥 Video Demostración
 
-> 🔄 Video en proceso — grabado con OBS Studio. Será agregado próximamente.
+Demostración del agente de n8n respondiendo una consulta de noticias (usando News API) y una consulta general (usando Tavily):
+
+🔗 [Ver video en Google Drive](https://drive.google.com/file/d/1zu9CqVfg_1_eJXsu09noqkVk3hUNapsC/view?usp=drive_link)
 
 ---
 
