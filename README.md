@@ -106,7 +106,7 @@ Aprendí que en Google Colab el orden de ejecución de las celdas es crítico. R
 
 ## 👤 Sobre el Autor
 
-Gerardo, 60 años, Guatemala. Mensajero de alto rendimiento y ahora también explorador del mundo de la Inteligencia Artificial. Prueba de que nunca es tarde para aprender tecnología cuando la curiosidad y la perseverancia están presentes.
+Gerardo, 62 años, Guatemala. Mensajero de alto rendimiento y ahora también explorador del mundo de la Inteligencia Artificial. Prueba de que nunca es tarde para aprender tecnología cuando la curiosidad y la perseverancia están presentes.
 
 ## 🎥 Video Demostración
 
