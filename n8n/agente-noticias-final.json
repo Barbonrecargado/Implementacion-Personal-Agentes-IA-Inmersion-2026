@@ -1,0 +1,201 @@
+{
+  "name": "Agente_dual_corregido",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -16,
+        -32
+      ],
+      "id": "1b025f51-5b23-4f62-a4b6-3231539b0f9b",
+      "name": "When chat message received",
+      "webhookId": "037ccb04-afcf-44b6-b304-3938f210bba0"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Eres un asistente que responde en español. Tienes dos herramientas de búsqueda: \"Noticias News Api\" y Tavily. Para preguntas de noticias o actualidad, consulta primero \"Noticias News Api\" y complementa con Tavily si hace falta más contexto. Para cualquier otro tema, usa Tavily. Cita siempre la fuente y la fecha cuando las tengas."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        224,
+        -32
+      ],
+      "id": "edf0e0c4-15e5-475b-a75f-02583ca616c2",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        208,
+        176
+      ],
+      "id": "7d9b0840-7b00-47f5-94f2-a552737b25fe",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.5-flash-lite",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        64,
+        176
+      ],
+      "id": "ebfa160d-c733-48ff-a4a3-cd292a6d8937",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "bC1U5mTafkvv6sd1",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Usa esta herramienta como tu motor de búsqueda principal para obtener datos actualizados en tiempo real sobre cualquier tema (nutrición, salud, finanzas, precios de mercado, clima o tecnología) cuando la información requerida no sea un hecho histórico estático.",
+        "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Query', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "@tavily/n8n-nodes-tavily.tavilyTool",
+      "typeVersion": 1,
+      "position": [
+        368,
+        176
+      ],
+      "id": "d2d3fae6-c327-4fbe-860e-6d600e30102d",
+      "name": "Search in Tavily",
+      "credentials": {
+        "tavilyApi": {
+          "id": "Z154eXk6YlUtN7lw",
+          "name": "Tavily account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Busca noticias recientes en español mediante News API. Úsala cuando el usuario pregunte por noticias o actualidad.",
+        "url": "=https://newsapi.org/v2/everything",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "language",
+              "value": "es"
+            },
+            {
+              "name": "pageSize",
+              "value": "5"
+            },
+            {
+              "name": "sortBy",
+              "value": "publishedAt"
+            },
+            {
+              "name": "q",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters3_Value', ``, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        528,
+        176
+      ],
+      "id": "3ddab06d-2cdb-4636-98c1-7d1eed02cb63",
+      "name": "Noticias News Api",
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "7iRYR5WA0ELjTbUH",
+          "name": "Query Auth account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search in Tavily": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Noticias News Api": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "ad9fc5e8-55fc-4920-9a20-6acee6007b46",
+  "meta": {
+    "instanceId": "011ced4ce9950d96aacc8192c51d6fe7ef17e52cc5c3a490d62d4f7891c49d28"
+  },
+  "nodeGroups": [],
+  "id": "Kr4QU2A362zLTU0O",
+  "tags": []
+}
